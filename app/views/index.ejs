@@ -17,6 +17,16 @@
 	</head>
 
 	<body class="body-index">
+		<% if(validacao.length > 0) {%>
+			<div class="alert alert-danger">
+				<strong>Atenção</strong>
+				<ul>
+					<% for(let i = 0; i < validacao.length; i++) { %>
+						<li><%= validacao[i].msg%></li>
+					<% } %>
+				</ul>
+			</div>
+		<% } %>
 
 		<nav class="navbar navbar-default navbar-static-top">
 			<div class="container">

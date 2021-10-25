@@ -1,5 +1,5 @@
 module.exports.home = function(application, req, res){
-    res.render('index');
+    res.render('index', {validacao: {}});
 }
 module.exports.autenticar = function(application, req, res){
     const dadosFomr = req.body;
@@ -14,5 +14,10 @@ module.exports.autenticar = function(application, req, res){
         return;
     }
 
-    res.send('tuso ok para criar a sessão!');
+    const connection = application.config.dbConnection;
+    const UsuariosDAO = new application.app.models.UsuarioDAO(connection);
+
+    UsuariosDAO.autenticar(dadosFomr, req, res);
+
+   // res.send('tudo ok para criar a sessão!');
 }
