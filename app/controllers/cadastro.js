@@ -18,11 +18,12 @@ module.exports.cadastrar = function(application, req, res){
     }
 
     const connection = application.config.dbConnection;
-    console.log(connection);
 
     const UsuarioDAO = new application.app.models.UsuarioDAO(connection);
+    const JogoDAO = new application.app.models.JogoDAO(connection);
 
     UsuarioDAO.inserirUsuario(dadosForm);
+    JogoDAO.gerarParametros(dadosForm.usuario);
 
     res.send('podemos cadastrar');
 }

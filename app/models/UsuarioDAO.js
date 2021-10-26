@@ -9,14 +9,12 @@ UsuarioDAO.prototype.inserirUsuario = function(usuario){
             mongoclient.close();
         });
     });
-    console.log(this._connection);
 }
 
 UsuarioDAO.prototype.autenticar = function(usuario, req, res){
     this._connection.open(function(err, mongoclient){
         mongoclient.collection("usuarios", function(err, collection){
             collection.find(usuario).toArray(function(err, result){
-                console.log(result);
                 if(result[0] != undefined){
                     req.session.autorizado = true;
                     req.session.usuario = result[0].usuario;
@@ -31,7 +29,6 @@ UsuarioDAO.prototype.autenticar = function(usuario, req, res){
             mongoclient.close();
         });
     });
-    console.log(this._connection);
 }
 
 module.exports = function(){
