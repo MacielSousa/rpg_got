@@ -4,7 +4,7 @@ module.exports.home = function(application, req, res){
 module.exports.autenticar = function(application, req, res){
     const dadosFomr = req.body;
 
-    req.assert('usuario', 'Usuários deve ser vazio').notEmpty();
+    req.assert('usuario', 'Usuário não deve ser vazio').notEmpty();
     req.assert('senha', 'Senha não deve ser vazia').notEmpty();
 
     const erros = req.validationErrors();

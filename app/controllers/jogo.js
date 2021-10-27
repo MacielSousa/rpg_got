@@ -45,12 +45,9 @@ module.exports.pergaminhos = function(application, req, res){
     /* recuperar as ações inseridas no banco de dados */
     const connection = application.config.dbConnection;
     const JogoDAO = new application.app.models.JogoDAO(connection);
-
     const usuario = req.session.usuario;
 
-    JogoDAO.getAcao(usuario);
-
-    res.render("pergaminhos", {validacao: {}});
+    JogoDAO.getAcao(usuario, res);
 
 }
 
@@ -83,4 +80,16 @@ module.exports.ordenar_acao_sudito = function(application, req, res){
     res.redirect('jogo?msg=B');
 
     
+}
+
+module.exports.revogar_acao = function(application, req, res){
+    
+    const url_query = req.query;
+
+    const connection = application.config.dbConnection;
+    const JogoDAO = new application.app.models.JogoDAO(connection);
+
+    const _id = url_query.id_acao;
+
+    JogoDAO.revogarAcao(_id, res);
 }
