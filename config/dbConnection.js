@@ -2,7 +2,6 @@ const mongo = require('mongodb');
 
 
 const connMongoDb = function() {
-   console.log('Entrou na função de conexão');
    const db = new mongo.Db(
        'got',
         new mongo.Server(

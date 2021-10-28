@@ -2,7 +2,7 @@ function UsuarioDAO(connection){
    this._connection = connection();
 }
 
-UsuarioDAO.prototype.inserirUsuario = function(usuario){
+UsuarioDAO.prototype.inserirUsuario = function(usuario, res){
     this._connection.open(function(err, mongoclient){
         mongoclient.collection("usuarios", function(err, collection){
             collection.insert(usuario);
@@ -23,7 +23,7 @@ UsuarioDAO.prototype.autenticar = function(usuario, req, res){
                 if(result[0] != undefined){
                     res.redirect("jogo");
                 }else{
-                    res.render("index", {validacao: {}});
+                    res.render('index', {validacao: [{msg : 'usuário ou senha inválidos'}], dadosForm: usuario});
                 }
             });
             mongoclient.close();

@@ -1,5 +1,5 @@
 module.exports.home = function(application, req, res){
-    res.render('index', {validacao: {}});
+    res.render('index', {validacao: {}, dadosForm: {}});
 }
 module.exports.autenticar = function(application, req, res){
     const dadosFomr = req.body;
@@ -8,7 +8,6 @@ module.exports.autenticar = function(application, req, res){
     req.assert('senha', 'Senha não deve ser vazia').notEmpty();
 
     const erros = req.validationErrors();
-
     if(erros){
         res.render('index', {validacao:erros});
         return;
@@ -19,5 +18,4 @@ module.exports.autenticar = function(application, req, res){
 
     UsuariosDAO.autenticar(dadosFomr, req, res);
 
-   // res.send('tudo ok para criar a sessão!');
 }
